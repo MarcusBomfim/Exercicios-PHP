@@ -1,0 +1,17 @@
+# Dependências
+/vendor/
+composer.lock
+
+# Editores / IDEs
+.vscode/
+.idea/
+*.swp
+
+# Sistema operacional
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Logs e temporários
+*.log
+*.cache
