@@ -1,30 +1,14 @@
 # Exercícios de PHP
 
 10 exercícios de PHP para praticar do básico ao avançado: **5 fáceis, 3 médios
-e 2 difíceis**. Cada arquivo é autocontido e traz:
+e 2 difíceis**.
 
-1. o **enunciado** no comentário do topo;
-2. as **funções/classes vazias** para preencher (procure por `// TODO`);
-3. uma **bateria de testes** no final — não precisa mexer nela.
-
-Enquanto o exercício não está implementado, os testes falham com a mensagem
-`ainda não foi implementada`. Quando tudo passa, aparece `TUDO CERTO!`.
-
-```
-==============================================================
-  Exercicio 01 - Variaveis e tabuada
-==============================================================
-  [ OK   ] tabuada(3) tem 10 linhas
-  [FALHOU] somaAte(5)
-           esperado: 15
-           obtido:   null
---------------------------------------------------------------
-  9 passaram / 1 falharam - continue tentando.
-```
+Cada arquivo contém apenas o **enunciado**, em um comentário no topo. Você
+escreve a solução no próprio arquivo, abaixo do comentário.
 
 ## Requisitos
 
-**PHP 8.1 ou superior** (os exercícios usam `match`, `readonly` e
+**PHP 8.1 ou superior** (alguns exercícios pedem `match`, `readonly` e
 propriedades promovidas no construtor).
 
 ```bash
@@ -40,27 +24,17 @@ No VS Code, valem a pena as extensões **PHP Intelephense** e **PHP Debug**.
 
 ## Como rodar
 
-Um exercício por vez:
-
 ```bash
 php faceis/01_variaveis_e_tabuada.php
-```
-
-Todos de uma vez:
-
-```bash
-php rodar_todos.php
 ```
 
 ## Estrutura
 
 ```
 .
-├── faceis/       exercícios 01 a 05
-├── medios/       exercícios 06 a 08
-├── dificeis/     exercícios 09 e 10
-├── lib/teste.php mini framework de testes usado por todos os arquivos
-└── rodar_todos.php
+├── faceis/     exercícios 01 a 05
+├── medios/     exercícios 06 a 08
+└── dificeis/   exercícios 09 e 10
 ```
 
 ## Lista dos exercícios
@@ -90,5 +64,6 @@ php rodar_todos.php
 ## Regras sugeridas
 
 - Resolva na ordem — os difíceis usam o que vem antes.
-- Não altere os testes para fazê-los passar. 🙂
+- Cada enunciado traz exemplos de entrada e saída: use-os para testar
+  seu código.
 - Travou? Procure uma dica, não a resposta pronta.

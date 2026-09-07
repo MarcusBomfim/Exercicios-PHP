@@ -1,6 +1,4 @@
 <?php
-declare(strict_types=1);
-require __DIR__ . '/../lib/teste.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -27,51 +25,6 @@ require __DIR__ . '/../lib/teste.php';
 |    Ignora espaços e maiúsculas/minúsculas.
 |    "Ame a ema" -> true | "PHP rocks" -> false
 |
-| Rode com:  php faceis/03_strings.php
-|
 */
 
-function inverterTexto(string $texto)
-{
-    // TODO: escreva seu código aqui
-    throw new RuntimeException('inverterTexto() ainda não foi implementada');
-}
 
-function contarVogais(string $texto)
-{
-    // TODO: escreva seu código aqui
-    throw new RuntimeException('contarVogais() ainda não foi implementada');
-}
-
-function formatarNome(string $nome)
-{
-    // TODO: escreva seu código aqui
-    throw new RuntimeException('formatarNome() ainda não foi implementada');
-}
-
-function ehPalindromo(string $texto)
-{
-    // TODO: escreva seu código aqui
-    throw new RuntimeException('ehPalindromo() ainda não foi implementada');
-}
-
-
-/* ----------------------- TESTES (não precisa mexer) ----------------------- */
-
-titulo('Exercicio 03 - Strings');
-
-verificar('inverter "PHP e legal"', 'lagel e PHP', fn() => inverterTexto('PHP e legal'));
-verificar('inverter texto vazio', '', fn() => inverterTexto(''));
-
-verificar('vogais de "Programacao"', 5, fn() => contarVogais('Programacao'));
-verificar('vogais de "AEIOU"', 5, fn() => contarVogais('AEIOU'));
-verificar('vogais de "xyz"', 0, fn() => contarVogais('xyz'));
-
-verificar('formatar "  maria   da  SILVA "', 'Maria Da Silva', fn() => formatarNome('  maria   da  SILVA '));
-verificar('formatar "JOAO pedro"', 'Joao Pedro', fn() => formatarNome('JOAO pedro'));
-
-verificar('"Ame a ema" e palindromo', true, fn() => ehPalindromo('Ame a ema'));
-verificar('"arara" e palindromo', true, fn() => ehPalindromo('arara'));
-verificar('"PHP rocks" nao e palindromo', false, fn() => ehPalindromo('PHP rocks'));
-
-resumo();
