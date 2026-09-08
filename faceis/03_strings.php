@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
 |--------------------------------------------------------------------------
 | EXERCÍCIO 03 (FÁCIL) - Manipulação de strings
@@ -28,3 +30,35 @@
 */
 
 
+function inverterTexto(string $texto): string
+{
+    return strrev($texto);
+}
+
+function contarVogais(string $texto): int
+{
+    return (int) preg_match_all('/[aeiou]/i', $texto);
+}
+
+function formatarNome(string $nome): string
+{
+    $limpo = preg_replace('/\s+/', ' ', trim($nome)) ?? '';
+
+    return ucwords(strtolower($limpo));
+}
+
+function ehPalindromo(string $texto): bool
+{
+    $normalizado = strtolower(str_replace(' ', '', $texto));
+
+    return $normalizado === strrev($normalizado);
+}
+
+
+/* --- Demonstracao --- */
+
+echo inverterTexto('PHP e legal'), PHP_EOL;
+echo 'vogais em "Programacao": ', contarVogais('Programacao'), PHP_EOL;
+echo formatarNome('  maria   da  SILVA '), PHP_EOL;
+echo '"Ame a ema" e palindromo? ', ehPalindromo('Ame a ema') ? 'sim' : 'nao', PHP_EOL;
+echo '"PHP rocks" e palindromo? ', ehPalindromo('PHP rocks') ? 'sim' : 'nao', PHP_EOL;

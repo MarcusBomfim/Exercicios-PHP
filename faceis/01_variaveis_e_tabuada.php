@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
 |--------------------------------------------------------------------------
 | EXERCÍCIO 01 (FÁCIL) - Variáveis, operadores e laço for
@@ -28,3 +30,38 @@
 */
 
 
+function tabuada(int $numero): array
+{
+    $linhas = [];
+
+    for ($i = 1; $i <= 10; $i++) {
+        $linhas[] = sprintf('%d x %d = %d', $numero, $i, $numero * $i);
+    }
+
+    return $linhas;
+}
+
+function somaAte(int $limite): int
+{
+    $total = 0;
+
+    for ($i = 1; $i <= $limite; $i++) {
+        $total += $i;
+    }
+
+    return $total;
+}
+
+function precoComDesconto(float $preco, float $percentual): float
+{
+    return round($preco - ($preco * $percentual / 100), 2);
+}
+
+
+/* --- Demonstracao: rode com `php faceis/01_variaveis_e_tabuada.php` --- */
+
+echo implode(PHP_EOL, tabuada(3)), PHP_EOL;
+echo 'somaAte(5) = ', somaAte(5), PHP_EOL;
+echo 'somaAte(100) = ', somaAte(100), PHP_EOL;
+echo 'precoComDesconto(100, 10) = ', precoComDesconto(100.0, 10.0), PHP_EOL;
+echo 'precoComDesconto(59.9, 15) = ', precoComDesconto(59.9, 15.0), PHP_EOL;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
 |--------------------------------------------------------------------------
 | EXERCÍCIO 02 (FÁCIL) - Condicionais (if / elseif / switch)
@@ -28,3 +30,49 @@
 */
 
 
+function situacaoDoAluno(float $nota): string
+{
+    if ($nota < 0 || $nota > 10) {
+        return 'Nota invalida';
+    }
+
+    if ($nota >= 7.0) {
+        return 'Aprovado';
+    }
+
+    if ($nota >= 5.0) {
+        return 'Recuperacao';
+    }
+
+    return 'Reprovado';
+}
+
+function ehBissexto(int $ano): bool
+{
+    return $ano % 4 === 0 && ($ano % 100 !== 0 || $ano % 400 === 0);
+}
+
+function classificarIdade(int $idade): string
+{
+    return match (true) {
+        $idade <= 12 => 'Crianca',
+        $idade <= 17 => 'Adolescente',
+        $idade <= 59 => 'Adulto',
+        default => 'Idoso',
+    };
+}
+
+
+/* --- Demonstracao --- */
+
+foreach ([9.5, 6.9, 4.9, 11.0] as $nota) {
+    echo 'nota ', $nota, ' -> ', situacaoDoAluno($nota), PHP_EOL;
+}
+
+foreach ([2024, 2023, 1900, 2000] as $ano) {
+    echo $ano, ' e bissexto? ', ehBissexto($ano) ? 'sim' : 'nao', PHP_EOL;
+}
+
+foreach ([5, 15, 30, 60] as $idade) {
+    echo $idade, ' anos -> ', classificarIdade($idade), PHP_EOL;
+}
