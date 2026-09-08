@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
 |--------------------------------------------------------------------------
 | EXERCÍCIO 07 (MÉDIO) - POO: classe ContaBancaria
@@ -39,3 +41,118 @@
 */
 
 
+class SaldoInsuficienteException extends RuntimeException
+{
+}
+
+class ContaBancaria
+{
+    private float $saldo;
+
+    /** @var string[] */
+    private array $extrato = [];
+
+    public function __construct(private string $titular, float $saldoInicial = 0.0)
+    {
+        if ($saldoInicial < 0) {
+            throw new InvalidArgumentException('O saldo inicial nao pode ser negativo');
+        }
+
+        $this->saldo = $saldoInicial;
+    }
+
+    public function getTitular(): string
+    {
+        return $this->titular;
+    }
+
+    public function getSaldo(): float
+    {
+        return $this->saldo;
+    }
+
+    public function getExtrato(): array
+    {
+        return $this->extrato;
+    }
+
+    public function depositar(float $valor): void
+    {
+        $this->creditar($valor);
+
+        $this->extrato[] = sprintf('Deposito de %.2f', $valor);
+    }
+
+    public function sacar(float $valor): void
+    {
+        $this->debitar($valor);
+
+        $this->extrato[] = sprintf('Saque de %.2f', $valor);
+    }
+
+    public function transferirPara(ContaBancaria $destino, float $valor): void
+    {
+        $this->debitar($valor);
+        $destino->creditar($valor);
+
+        $this->extrato[] = sprintf('Transferencia enviada de %.2f', $valor);
+        $destino->extrato[] = sprintf('Transferencia recebida de %.2f', $valor);
+    }
+
+    private function creditar(float $valor): void
+    {
+        $this->exigirValorPositivo($valor);
+
+        $this->saldo += $valor;
+    }
+
+    private function debitar(float $valor): void
+    {
+        $this->exigirValorPositivo($valor);
+
+        if ($valor > $this->saldo) {
+            throw new SaldoInsuficienteException(
+                sprintf('Saldo insuficiente: disponivel %.2f, pedido %.2f', $this->saldo, $valor)
+            );
+        }
+
+        $this->saldo -= $valor;
+    }
+
+    private function exigirValorPositivo(float $valor): void
+    {
+        if ($valor <= 0) {
+            throw new InvalidArgumentException('O valor precisa ser maior que zero');
+        }
+    }
+}
+
+
+/* --- Demonstracao --- */
+
+$ana = new ContaBancaria('Ana', 200.0);
+$bia = new ContaBancaria('Bia');
+
+$ana->depositar(100.0);
+$ana->sacar(30.0);
+$ana->transferirPara($bia, 50.0);
+
+foreach ([$ana, $bia] as $conta) {
+    echo $conta->getTitular(), ' - saldo ', number_format($conta->getSaldo(), 2), PHP_EOL;
+
+    foreach ($conta->getExtrato() as $linha) {
+        echo '  ', $linha, PHP_EOL;
+    }
+}
+
+try {
+    $bia->sacar(1000.0);
+} catch (SaldoInsuficienteException $e) {
+    echo 'Erro esperado: ', $e->getMessage(), PHP_EOL;
+}
+
+try {
+    $ana->depositar(0.0);
+} catch (InvalidArgumentException $e) {
+    echo 'Erro esperado: ', $e->getMessage(), PHP_EOL;
+}
